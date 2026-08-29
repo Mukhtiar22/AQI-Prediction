@@ -1,0 +1,78 @@
+name: AQI Predictor Pipelines
+
+on:
+  schedule:
+    # Feature pipeline: every hour
+    - cron: "0 * * * *"
+    # Training pipeline: once a day at 02:00 UTC (see job-level `if` below)
+    - cron: "0 2 * * *"
+  workflow_dispatch:
+    inputs:
+      run_training:
+        description: "Also run the training pipeline"
+        type: boolean
+        default: false
+
+jobs:
+  feature-pipeline:
+    runs-on: ubuntu-latest
+    if: github.event.schedule == '0 * * * *' || github.event_name == 'workflow_dispatch'
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: "pip"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Restore feature store cache
+        uses: actions/cache@v4
+        with:
+          path: data/feature_store
+          key: feature-store-${{ github.run_id }}
+          restore-keys: feature-store-
+
+      - name: Run feature pipeline
+        run: python pipelines/feature_pipeline.py --cities "Karachi,Lahore" --lookback-hours 96
+
+      # Commit the updated feature store back to the repo so it persists
+      # across runs (a real deployment would use Hopsworks/Vertex AI
+      # instead, which persists remotely — see utils/feature_store.py)
+      - name: Commit updated features
+        run: |
+          git config user.name "aqi-bot"
+          git config user.email "aqi-bot@users.noreply.github.com"
+          git add data/feature_store
+          git diff --cached --quiet || git commit -m "chore: hourly feature update [skip ci]"
+          git push
+
+  training-pipeline:
+    runs-on: ubuntu-latest
+    needs: []
+    if: github.event.schedule == '0 2 * * *' || (github.event_name == 'workflow_dispatch' && github.event.inputs.run_training == 'true')
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: "pip"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run training pipeline
+        run: |
+          python pipelines/training_pipeline.py --city "Karachi"
+          python pipelines/training_pipeline.py --city "Lahore"
+
+      - name: Commit updated model registry
+        run: |
+          git config user.name "aqi-bot"
+          git config user.email "aqi-bot@users.noreply.github.com"
+          git add models/registry
+          git diff --cached --quiet || git commit -m "chore: daily model retrain [skip ci]"
+          git push
