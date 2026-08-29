@@ -9,6 +9,8 @@ Weather & Pollution API ──▶ Feature generation ──▶ Feature store ─
      (Open-Meteo)              (Python, hourly)      (Parquet)      (Python, daily)     (joblib+JSON)    (Streamlit)
 ```
 
+**Live demo:** View the interactive dashboard online at [our Streamlit demo](https://our-aqi.streamlit.app/) — a quick way to visualize forecasts and SHAP explanations without running the project locally.
+
 ## 1. What's implemented
 
 | Spec requirement | Status | Where |
