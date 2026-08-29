@@ -18,7 +18,7 @@ from utils.feature_store import FeatureStore
 from utils.features import TARGET_HORIZONS_HOURS
 from utils.model_registry import ModelRegistry
 
-st.set_page_config(page_title="Pearls AQI Predictor", page_icon="🌫️", layout="wide")
+st.set_page_config(page_title="AI-Based AQI Predictor", page_icon="🌫️", layout="wide")
 
 CITIES = ["Karachi", "Sukkur", "Naushahro Feroze"]
 HORIZON_LABELS = {24: "+24H", 48: "+48H", 72: "+72H"}
@@ -88,7 +88,7 @@ def delta_badge(current, previous, digits=1):
 def render_sidebar():
     with st.sidebar:
         st.markdown(
-            "<div class='brand-block'><div class='brand'>PEARLS</div><div class='subtitle'>AQI PREDICTOR</div><div class='subtle'>AI-Powered Air Quality Forecasting</div></div>",
+            "<div class='brand-block'><div class='brand'>AI-BASED AQI PREDICTOR</div><div class='subtitle'>AIR QUALITY FORECASTING</div><div class='subtle'>AI-Powered Air Quality Forecasting</div></div>",
             unsafe_allow_html=True,
         )
         nav = st.radio(

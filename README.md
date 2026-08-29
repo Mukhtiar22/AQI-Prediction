@@ -120,29 +120,8 @@ features carry most of the predictive signal, more than raw recency.
 end-to-end offline; re-run steps 1-2 above with live network access for
 real-world metrics, which will vary by city and season.
 
-## 5. EDA
 
-`notebooks/eda.ipynb` walks through: AQI distribution & EPA category
-breakdown, diurnal pattern (rush-hour PM2.5 bumps), weekday vs weekend
-comparison, correlation heatmap between weather variables and AQI, and
-autocorrelation of AQI (motivating the lag features chosen).
-
-## 6. What's not included / next steps
-
-- **Deep learning models** (LSTM/Temporal Fusion Transformer) were scoped
-  out to keep the deliverable runnable on modest free-tier compute; the
-  `CANDIDATE_MODELS` dict in `training_pipeline.py` is the natural place to
-  add a PyTorch/TensorFlow candidate — it competes on the same RMSE
-  leaderboard automatically.
-- **Real Hopsworks/Vertex AI integration** — interfaces are ready
-  (`utils/feature_store.py`, `utils/model_registry.py`), swap documented
-  inline; not wired up by default so the project needs zero signups to run.
-- **Multi-city support** exists in the pipelines (`--cities "A,B,C"`) but the
-  dashboard currently loads one city at a time via a text box.
-- Alerts are currently in-dashboard only; wiring to email/SMS/webhook would
-  be a small addition to `utils/aqi_levels.py`'s `is_hazardous()` check.
-
-## 7. Repo layout
+## 5. Repo layout
 
 ```
 aqi-predictor/
