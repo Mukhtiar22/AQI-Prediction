@@ -36,7 +36,7 @@ jobs:
           restore-keys: feature-store-
 
       - name: Run feature pipeline
-        run: python pipelines/feature_pipeline.py --cities "Karachi,Lahore" --lookback-hours 96
+        run: python pipelines/feature_pipeline.py --cities "Karachi,Sukkur, Naushahro Feroze" --lookback-hours 96
 
       # Commit the updated feature store back to the repo so it persists
       # across runs (a real deployment would use Hopsworks/Vertex AI
@@ -67,7 +67,8 @@ jobs:
       - name: Run training pipeline
         run: |
           python pipelines/training_pipeline.py --city "Karachi"
-          python pipelines/training_pipeline.py --city "Lahore"
+          python pipelines/training_pipeline.py --city "Sukkur"
+          python pipelines/training_pipeline.py --city "Naushahro Feroze"
 
       - name: Commit updated model registry
         run: |
