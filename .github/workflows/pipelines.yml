@@ -47,6 +47,7 @@ jobs:
           git config user.email "aqi-bot@users.noreply.github.com"
           git add data/feature_store
           git diff --cached --quiet || git commit -m "chore: hourly feature update [skip ci]"
+          git pull --rebase origin main
           git push
 
   training-pipeline:
@@ -76,4 +77,5 @@ jobs:
           git config user.email "aqi-bot@users.noreply.github.com"
           git add models/registry
           git diff --cached --quiet || git commit -m "chore: daily model retrain [skip ci]"
+          git pull --rebase origin main
           git push
