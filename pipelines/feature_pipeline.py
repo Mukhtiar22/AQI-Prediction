@@ -51,8 +51,7 @@ def run(cities: list[str], lookback_hours: int) -> None:
         # available yet for the most recent hours). This is expected and
         # fine — the backfill script covers a wide historical range so
         # plenty of complete rows accumulate over time.
-        feature_df = feature_df.dropna(subset=["aqi_lag_72h", "target_aqi_72h"])
-
+        feature_df = feature_df.dropna(subset=["aqi_lag_72h"])
         if feature_df.empty:
             print(f"[feature_pipeline] Not enough history yet for complete rows in {city}")
             continue
