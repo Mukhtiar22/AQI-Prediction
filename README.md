@@ -11,6 +11,10 @@ Weather & Pollution API ──▶ Feature generation ──▶ Feature store ─
 
 **Live demo:** View the interactive dashboard online at [our Streamlit demo](https://our-aqi.streamlit.app/) — a quick way to visualize forecasts and SHAP explanations without running the project locally.
 
+## Project Documentation
+
+Access the complete project report and documentation here: [Google Drive Project Documentation](https://drive.google.com/file/d/1xMAnNurl8RPFnW5FMMvdhMh2-6p-pxH1/view?usp=sharing)
+
 ## 1. What's implemented
 
 | Spec requirement | Status | Where |
@@ -123,24 +127,3 @@ end-to-end offline; re-run steps 1-2 above with live network access for
 real-world metrics, which will vary by city and season.
 
 
-## 5. Repo layout
-
-```
-aqi-predictor/
-├── pipelines/
-│   ├── feature_pipeline.py      # hourly: fetch + engineer + store features
-│   ├── backfill.py               # one-off: bulk historical features
-│   └── training_pipeline.py      # daily: train, evaluate, register best model
-├── utils/
-│   ├── data_source.py            # Open-Meteo client + synthetic fallback
-│   ├── features.py               # feature engineering
-│   ├── feature_store.py          # local Parquet "feature store"
-│   ├── model_registry.py         # local joblib+JSON "model registry"
-│   └── aqi_levels.py             # EPA AQI categories + hazard alerting
-├── app/
-│   └── app.py                    # Streamlit dashboard
-├── notebooks/
-│   └── eda.ipynb                 # exploratory data analysis
-├── .github/workflows/pipelines.yml  # hourly/daily CI/CD automation
-└── requirements.txt
-```
