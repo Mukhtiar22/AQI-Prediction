@@ -1,0 +1,67 @@
+{
+  "name": "aqi_forecast_naushahro_feroze_target_aqi_24h",
+  "version": 11,
+  "trained_at_utc": "2026-09-05T06:48:46.804537+00:00",
+  "metrics": {
+    "rmse": 9.123791779851327,
+    "mae": 6.844318907872571,
+    "r2": 0.7878419418692619
+  },
+  "feature_names": [
+    "pm2_5",
+    "pm10",
+    "ozone",
+    "no2",
+    "so2",
+    "co",
+    "us_aqi",
+    "temperature",
+    "humidity",
+    "wind_speed",
+    "pressure",
+    "precipitation",
+    "hour",
+    "day",
+    "month",
+    "day_of_week",
+    "is_weekend",
+    "hour_sin",
+    "hour_cos",
+    "month_sin",
+    "month_cos",
+    "aqi_lag_1h",
+    "aqi_lag_6h",
+    "aqi_lag_24h",
+    "aqi_lag_48h",
+    "aqi_lag_72h",
+    "aqi_roll_mean_6h",
+    "aqi_roll_std_6h",
+    "aqi_roll_mean_24h",
+    "aqi_roll_std_24h",
+    "aqi_change_rate_1h",
+    "aqi_change_rate_24h"
+  ],
+  "target_name": "target_aqi_24h",
+  "extra": {
+    "algorithm": "gradient_boosting",
+    "all_candidates": {
+      "ridge": {
+        "rmse": 17.774682100224215,
+        "mae": 11.257547112161031,
+        "r2": 0.19478383459952142
+      },
+      "random_forest": {
+        "rmse": 9.834681156372705,
+        "mae": 6.912574695137772,
+        "r2": 0.7534929355389388
+      },
+      "gradient_boosting": {
+        "rmse": 9.123791779851327,
+        "mae": 6.844318907872571,
+        "r2": 0.7878419418692619
+      }
+    },
+    "n_train": 1954,
+    "n_test": 489
+  }
+}
