@@ -1,0 +1,67 @@
+{
+  "name": "aqi_forecast_karachi_target_aqi_24h",
+  "version": 30,
+  "trained_at_utc": "2026-09-23T07:33:07.312959+00:00",
+  "metrics": {
+    "rmse": 8.471872923221637,
+    "mae": 6.108322508979026,
+    "r2": 0.3346685835366513
+  },
+  "feature_names": [
+    "pm2_5",
+    "pm10",
+    "ozone",
+    "no2",
+    "so2",
+    "co",
+    "us_aqi",
+    "temperature",
+    "humidity",
+    "wind_speed",
+    "pressure",
+    "precipitation",
+    "hour",
+    "day",
+    "month",
+    "day_of_week",
+    "is_weekend",
+    "hour_sin",
+    "hour_cos",
+    "month_sin",
+    "month_cos",
+    "aqi_lag_1h",
+    "aqi_lag_6h",
+    "aqi_lag_24h",
+    "aqi_lag_48h",
+    "aqi_lag_72h",
+    "aqi_roll_mean_6h",
+    "aqi_roll_std_6h",
+    "aqi_roll_mean_24h",
+    "aqi_roll_std_24h",
+    "aqi_change_rate_1h",
+    "aqi_change_rate_24h"
+  ],
+  "target_name": "target_aqi_24h",
+  "extra": {
+    "algorithm": "random_forest",
+    "all_candidates": {
+      "ridge": {
+        "rmse": 10.195443408335429,
+        "mae": 6.659813506589619,
+        "r2": 0.03641195736382974
+      },
+      "random_forest": {
+        "rmse": 8.471872923221637,
+        "mae": 6.108322508979026,
+        "r2": 0.3346685835366513
+      },
+      "gradient_boosting": {
+        "rmse": 9.645438378539604,
+        "mae": 7.435374698762805,
+        "r2": 0.13757148578274947
+      }
+    },
+    "n_train": 2300,
+    "n_test": 575
+  }
+}
